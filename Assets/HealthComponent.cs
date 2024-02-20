@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class HealthComponent : MonoBehaviour
 {
     public UnityEvent onHitEvent;
+    public UnityEvent onDieEvent;
+
     public float health;
     public float maxHealth;
     public float healCooldown = 5;
@@ -20,7 +22,7 @@ public class HealthComponent : MonoBehaviour
 
     private void Update()
     {
-        if(timer > healCooldown && health < maxHealth)
+        if (timer > healCooldown && health < maxHealth)
         {
             health += healPerSecond * Time.deltaTime;
 
@@ -48,7 +50,7 @@ public class HealthComponent : MonoBehaviour
     {
         timer = 0;
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             Die();
         }
@@ -56,6 +58,11 @@ public class HealthComponent : MonoBehaviour
 
     public void Die()
     {
-        DestroyThis();
+        onDieEvent.Invoke();
+    }
+
+    public void GoToHomeScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

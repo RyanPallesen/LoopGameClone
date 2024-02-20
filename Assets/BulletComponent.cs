@@ -26,7 +26,7 @@ public class BulletComponent : MonoBehaviour
         {
             float time = (timer / lifetime);
 
-            this.transform.localScale = Vector3.Lerp(Vector3.one / 0.25f, Vector3.one * 0.05f, time);
+            this.transform.localScale = Vector3.Lerp(Vector3.one / 0.25f, Vector3.one * 0.1f, time);
         }
     }
 
