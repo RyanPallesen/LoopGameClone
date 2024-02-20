@@ -26,12 +26,16 @@ public class BulletComponent : MonoBehaviour
         {
             float time = (timer / lifetime);
 
-            this.transform.localScale = Vector3.Lerp(Vector3.one / 0.25f, Vector3.zero, time);
+            this.transform.localScale = Vector3.Lerp(Vector3.one / 0.25f, Vector3.one * 0.05f, time);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        HealthComponent hitComponent = collision.collider.gameObject.GetComponent<HealthComponent>();
+        if (hitComponent)
+        {
+            hitComponent.OnHit();
+        }
     }
 }

@@ -29,13 +29,15 @@ public class Player_Shoot : MonoBehaviour
     {
 
         GameObject instantiatedBullet = Instantiate<GameObject>(bulletPrefab);
-        instantiatedBullet.transform.position = this.transform.position;
 
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit outhit);
         Vector3 target = outhit.point;
         target.y = transform.position.y;
 
-        instantiatedBullet.GetComponent<Rigidbody>().velocity = (target - this.transform.position).normalized * shotSpeed;
+        Vector3 direction = (target - this.transform.position).normalized;
+
+        instantiatedBullet.GetComponent<Rigidbody>().velocity = direction * shotSpeed;
+        instantiatedBullet.transform.position = this.transform.position + direction * 1.25f;
 
     }
 }
