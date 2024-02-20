@@ -13,7 +13,7 @@ public class LoopingObject : MonoBehaviour
     {
         if(!falseCopy)
         {
-            Debug.LogError("Object " + gameObject.name + " did not have falsecopy in LoopingObject");
+            //Debug.LogError("Object " + gameObject.name + " did not have falsecopy in LoopingObject");
             return;
         }    
 

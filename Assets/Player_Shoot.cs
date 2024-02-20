@@ -13,22 +13,29 @@ public class Player_Shoot : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+    }
 
-        if(Input.GetMouseButtonDown(0))
+    public void TryShoot()
+    {
+        if (timer > cooldown)
         {
-            if(timer > cooldown)
-            {
-                timer = 0;
+            timer = 0;
 
-                GameObject instantiatedBullet = Instantiate<GameObject>(bulletPrefab);
-                instantiatedBullet.transform.position = this.transform.position;
-
-                Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit outhit);
-                Vector3 target = outhit.point;
-                target.y = transform.position.y;
-
-                instantiatedBullet.GetComponent<Rigidbody>().velocity = (target - this.transform.position).normalized * shotSpeed;
-            }
+            Shoot();
         }
+    }
+
+    public void Shoot()
+    {
+
+        GameObject instantiatedBullet = Instantiate<GameObject>(bulletPrefab);
+        instantiatedBullet.transform.position = this.transform.position;
+
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit outhit);
+        Vector3 target = outhit.point;
+        target.y = transform.position.y;
+
+        instantiatedBullet.GetComponent<Rigidbody>().velocity = (target - this.transform.position).normalized * shotSpeed;
+
     }
 }
