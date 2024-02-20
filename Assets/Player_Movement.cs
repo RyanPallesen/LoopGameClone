@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
-    float playerSpeed = 4;
+    public float playerSpeed = 3;
 
     public void UpdateInput(Vector2 movement)
     {
+        float oldMagnitude = movement.magnitude;
+        movement.Normalize();
+        
+        //Allows for partial press, controllers and getaxis lerping
+        movement *= oldMagnitude;
+
         movement *= playerSpeed;
         movement *= Time.deltaTime;
 

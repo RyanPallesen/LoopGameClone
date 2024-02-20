@@ -45,8 +45,11 @@ public class WorldManager : MonoBehaviour
     {
         Vector3 position = new Vector3(Random.Range(-16, 16), 0, Random.Range(-16, 16));
 
+        if (Vector3.Distance(position, Player_Inputs.instance.transform.position) < 5)
+            return;
+
         GameObject instantiatedObject = Instantiate<GameObject>(enemyPrefab);
-        enemyPrefab.transform.position = position;
+        instantiatedObject.transform.position = position;
 
 
     }
